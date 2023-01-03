@@ -6,6 +6,7 @@ from datetime import datetime
 
 USERNAME = ""
 PASSWORD = ""
+MEROORA_AZONOSITO = ""
 
 def get_data_from_url(date, session, sap_contextid, sap_appcontext):
     date_formatted = date.strftime("%Y-%m-%d")
@@ -39,7 +40,7 @@ def get_data_from_url(date, session, sap_contextid, sap_appcontext):
     }
 
     data = {
-        'azonosito': '9940204120',
+        'azonosito': MEROORA_AZONOSITO,
         'tipus': 'Fogyasztás',
         'idoszak_tol_mero': date_formatted,
         'idoszak_ig_mero': date_formatted,
@@ -235,7 +236,7 @@ def get_token():
     guid = ""
     sap_client=""
     for item in json.loads(response.text)["d"]["results"]:
-        if "9940204120" in item["FogyMeroAzon"]:
+        if MEROORA_AZONOSITO in item["FogyMeroAzon"]:
             url = item["URL"]
             guid_start = url.find("guid")+5
             guid_end = url[guid_start:].find("&")
